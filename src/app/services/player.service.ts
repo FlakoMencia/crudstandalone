@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Player } from '../commons/interfaces/player.interface';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class PlayerService {
     if(filter){
       q = query(playerRef, where('name','==', filter));
     }
-    return collectionData(q);
+    return collectionData(q) as unknown as Observable<Player[]>;
 
   }
 
